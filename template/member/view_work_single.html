@@ -298,7 +298,7 @@
         </div>
         {% endfor %}
 
-        <form method="POST" action='/add_comment={{work.id}}' class="comment-form">
+        <form method="POST" action='/add_comment_members={{work.id}}' class="comment-form">
             {% csrf_token %}
             <textarea name="comment" placeholder="Add a comment..." rows="3" required></textarea>
             <button type="submit">Submit</button>
