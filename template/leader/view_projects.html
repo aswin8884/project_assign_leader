@@ -1,0 +1,154 @@
+{% extends 'leader/leader_base.html' %}
+{% block content %}
+<style>
+    .card-container {
+        margin-top: 50px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .card-header {
+        background-color: #f7f7f7;
+        border-radius: 15px 15px 0 0;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card-header h6 {
+        font-size: 1.4rem;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .list-group-item {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .list-group-item h6 {
+        font-size: 1.2rem;
+        color: #e91e63;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .list-group-item span {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .list-group-item .text-dark {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5em 0.75em;
+        border-radius: 0.25rem;
+        color: #fff;
+        background-color: #f39c12;
+    }
+
+    .badge.bg-gradient-warning {
+        background: linear-gradient(45deg, #f39c12, #f1c40f);
+    }
+
+    .btn-link {
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .btn-link:hover {
+        color: #d81b60;
+    }
+
+    .ms-auto {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px;
+    }
+
+    .material-icons {
+        vertical-align: middle;
+    }
+
+    .list-group-item .ms-auto a {
+        margin-left: 10px; /* Space between buttons */
+    }
+
+    .project-header {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Space between image and title */
+        margin-bottom: 15px;
+    }
+
+    .project-header img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .project-header h6 {
+        margin: 0;
+        font-size: 1.4rem; /* Increase font size if needed */
+    }
+</style>
+
+<div class="row card-container">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Project Details</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <ul class="list-group">
+                    {% for p in projects %}
+                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                        <div class="d-flex flex-column">
+                            <div class="project-header">
+                                <img src="../static/media/{{p.project_image}}" alt="Project Image">
+                                <h6 class="text-lg">{{p.title}}</h6>
+                            </div>
+                            <span class="ms-sm-2" style="text-transform: capitalize;">{{p.description}}</span><br>
+                            <span class="text-dark">Uploaded date: {{p.uploaded_date}}</span><br>
+                            <span class="badge badge-sm bg-gradient-warning">Submission date: {{p.submission_date}}</span>
+                        </div>
+                        <div class="ms-auto">
+                            <a class="btn btn-link text-dark px-3 mb-0" href="/update_project_leader?id={{p.id}}">
+                                <i class="material-icons text-sm me-5" style="margin-left: 40px;">edit</i>Edit
+                            </a>
+                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/delete_project_leader?id={{p.id}}">
+                                <i class="material-icons text-sm me-5" style="margin-left: 40px;">delete</i>Delete
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for m in messages %}
+<script>alert("{{m}}")</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+

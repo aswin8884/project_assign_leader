@@ -1,0 +1,116 @@
+{% extends 'member/member_base.html' %}
+{% block content %}
+
+<style>
+    .card-container {
+        margin-top: 50px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .card-header {
+        background-color: #f7f7f7;
+        border-radius: 15px 15px 0 0;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card-header h6 {
+        font-size: 1.4rem; /* Slightly decreased font size */
+        color: #333;
+        font-weight: bold;
+    }
+
+    .list-group-item {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .list-group-item:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .list-group-item h6 {
+        font-size: 1.2rem; /* Slightly decreased font size */
+        color: #e91e63;
+        font-weight: bold;
+    }
+
+    .list-group-item span {
+        font-size: 1rem; /* Slightly decreased font size */
+        color: #555;
+    }
+
+    .list-group-item .text-dark {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .badge {
+        font-size: 0.9rem; /* Font size for the badge */
+        padding: 0.5em 0.75em;
+        border-radius: 0.25rem;
+        color: #fff;
+        background-color: #f39c12; /* Adjust badge color */
+    }
+
+    .badge.bg-gradient-warning {
+        background: linear-gradient(45deg, #f39c12, #f1c40f);
+    }
+
+    .btn-link {
+        font-size: 0.9rem; /* Slightly decreased font size */
+        transition: color 0.3s ease;
+    }
+
+    .btn-link:hover {
+        color: #d81b60;
+    }
+
+    .ms-auto {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-icons {
+        vertical-align: middle;
+    }
+</style>
+
+<div class="row card-container">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Project Details</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+                <ul class="list-group">
+                    {% for w in works %}
+                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                        <div class="d-flex flex-column">
+                            <h6 class="mb-4 text-lg">{{w.title}}</h6>
+                            <span class="ms-sm-2" style="text-transform: capitalize;">{{w.description}}</span></span>
+                            <span class="text-dark">Uploaded date {{w.uploaded_date}}</span><br>
+                            <span class="badge badge-sm bg-gradient-warning">Submission date {{w.submission_date}}</span></span>
+                        </div>
+                        <div class="ms-auto text-end">
+                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="/view_works_single_member?id={{w.id}}">View</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

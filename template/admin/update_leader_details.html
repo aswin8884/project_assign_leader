@@ -1,0 +1,128 @@
+{% extends 'admin/admin_base.html' %}
+{% block content %}
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h3 {
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-group label {
+        color: #555;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+        padding: 10px;
+    }
+
+    .form-control:focus {
+        border-color: #e91e63;
+        box-shadow: 0 0 8px rgba(233, 30, 99, 0.2);
+    }
+
+    .form-control-file {
+        border: none;
+    }
+
+    .btn-primary {
+        background-color: #e91e63;
+        border-color: #e91e63;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #d81b60;
+        box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: none;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #333;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+</style>
+
+<div class="form-container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Update Team Leader Details</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label for="id_name">Name</label>
+                    <input type="text" name="name" value="{{leader.name}}" id="id_name" class="form-control" placeholder="Enter name">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="id_team_name">Team Name</label>
+                    <input type="text" name="team_name" value="{{leader.team_name}}" id="id_team_name" class="form-control" placeholder="Enter team name">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="id_team_name">Role</label>
+                    <input type="text" name="job_name" value="{{leader.job_name}}" id="id_team_name" class="form-control" placeholder="Enter role">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="id_employee_id">Employee ID</label>
+                    <input type="text" name="employee_id" value="{{leader.employee_id}}" id="id_employee_id" class="form-control" placeholder="Enter employee ID">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="id_contact">Contact</label>
+                    <input type="text" name="contact" value="{{leader.contact}}" id="id_contact" class="form-control" placeholder="Enter contact number">
+                </div>
+                
+                
+                <div class="form-group mb-4">
+                    <label for="id_profile_picture">Profile Picture</label>
+                    <input type="file" name="profile_picture" id="id_profile_picture" class="form-control-file">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for m in messages %}
+<script>alert("{{m}}")</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

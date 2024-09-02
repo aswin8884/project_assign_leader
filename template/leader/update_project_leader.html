@@ -1,0 +1,120 @@
+{% extends 'leader/leader_base.html' %}
+{% block content %}
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h3 {
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form-group label {
+        color: #555;
+        font-weight: 500;
+    }
+
+    .form-control {
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+        padding: 10px;
+    }
+
+    .form-control:focus {
+        border-color: #e91e63;
+        box-shadow: 0 0 8px rgba(233, 30, 99, 0.2);
+    }
+
+    .form-control-file {
+        border: none;
+    }
+
+    .btn-primary {
+        background-color: #e91e63;
+        border-color: #e91e63;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #d81b60;
+        box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: none;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #333;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+</style>
+
+<div class="form-container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Project Details</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label for="id_name">Title</label>
+                    <input type="text" name="title" value="{{project.title}}" id="id_name" class="form-control" placeholder="Enter project title">
+                </div>
+            
+                <div class="form-group mb-3">
+                    <label for="id_team_name">Description</label>
+                    <textarea name="description" id="id_team_name" class="form-control" rows="4" placeholder="Enter project description">{{ project.description }}</textarea>
+                </div>
+                
+
+                <div class="form-group mb-4">
+                    <label for="id_profile_picture">Image</label>
+                    <input type="file" name="project_image" id="id_profile_picture" class="form-control-file">
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="id_employee_id">Submission Date</label>
+                    <input type="date" name="submission_date" id="id_employee_id" class="form-control" placeholder="Enter employee ID">
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-block">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for m in messages %}
+<script>alert("{{m}}")</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
