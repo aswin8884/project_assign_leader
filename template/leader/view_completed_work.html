@@ -85,7 +85,14 @@
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <div style="text-transform: capitalize;" class="alert alert-secondary alert-dismissible text-white text-center" role="alert">
-                    <span class="text-lg">{{ project.title }} - Project</span>
+                    <div class="d-flex px-2">
+                        <div>
+                          <img src="../static/media/{{project.project_image}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                        </div>
+                        <div class="my-auto">
+                          <h1 class="mb-0 text-lg" style="color: white;">{{project.title}}</h1>
+                        </div>
+                      </div>
                 </div>
             </div>
             <div class="card-body pt-4 p-3">
@@ -145,10 +152,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                
+
+                                        {% if project.completed %}
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Working</span>
+                                            <span class="badge badge-sm bg-gradient-success">Completed</span>
                                         </td>
+                                        {% else %}  
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-info">Working</span>
+                                        </td>
+                                        {% endif %}
+
                                     </tr>
                                     {% endfor %}
                                     

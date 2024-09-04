@@ -97,7 +97,14 @@
                     {% for w in works %}
                     <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                         <div class="d-flex flex-column">
-                            <h6 class="mb-4 text-lg">{{w.title}}</h6>
+                            <div class="d-flex px-2">
+                                <div>
+                                  <img src="../static/media/{{w.project_image}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                                </div>
+                                <div class="my-auto">
+                                  <h2 class="mb-0 text-lg">{{w.title}}</h2>
+                                </div>
+                              </div>
                             <span class="ms-sm-2" style="text-transform: capitalize;">{{w.description}}</span></span>
                             <span class="text-dark">Uploaded date {{w.uploaded_date}}</span><br>
                             <span class="badge badge-sm bg-gradient-warning">Submission date {{w.submission_date}}</span></span>

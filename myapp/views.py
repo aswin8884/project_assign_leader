@@ -491,27 +491,6 @@ def view_works_member(request):
 
     return render(request, "member/view_works.html", {"works": works})
 
-def view_works_single_member(request):
-
-    wid=request.GET.get('id')
-    work=Add_project.objects.get(id=wid)
-    comments=Add_comment.objects.filter(project_id=work)
-    # Calculate the days left until the submission deadline
-    today = timezone.now().date()  # This gives the current date
-    submission_date = work.submission_date.date()  # Convert datetime to date
-
-    # Subtract two date objects to get the number of days left
-    days_left = (submission_date - today).days
-    is_past_deadline = days_left < 0
-    context = {
-        'work': work,
-        'comments': comments,
-        'days_left': days_left,
-        'is_past_deadline': is_past_deadline
-    }
-
-    return render(request,"member/view_work_single.html",context)
-
 def add_progress_member(request):
     wid = request.GET.get('id')
     member_id = request.session.get('id')
@@ -541,6 +520,30 @@ def add_progress_member(request):
 
     return redirect(f'/view_works_single_member?id={project.id}')
 
+def view_works_single_member(request):
+
+    id=request.session['id']
+    member=Add_member.objects.get(id=id)
+    wid=request.GET.get('id')
+    work=Add_project.objects.get(id=wid)
+    comments=Add_comment.objects.filter(project_id=work)
+    # Calculate the days left until the submission deadline
+    today = timezone.now().date()  # This gives the current date
+    submission_date = work.submission_date.date()  # Convert datetime to date
+
+    # Subtract two date objects to get the number of days left
+    days_left = (submission_date - today).days
+    is_past_deadline = days_left < 0
+
+    return render(request,"member/view_work_single.html",
+        {
+        'work': work,
+        'comments': comments,
+        'days_left': days_left,
+        'is_past_deadline': is_past_deadline,
+        "member":member
+        })
+
 def submit_work_member(request):
 
     sid=request.GET.get('id')
@@ -548,7 +551,6 @@ def submit_work_member(request):
     work.completed=True
     work.completed_date=timezone.now()
     work.save()
-
 
     return redirect(f'/view_works_single_member?id={work.id}')
 
